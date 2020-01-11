@@ -1,8 +1,7 @@
 import React from "react";
-
+import "./App.css";
 import { CardList } from "./components/card-list/card-list.component";
-// import { SearchBox } from "./components/search-box/search-box.component";
-import "./components/search-box/search-box.styles.css";
+import { SearchBox } from "./components/search-box/search-box.component";
 
 class App extends React.Component {
   constructor() {
@@ -28,8 +27,10 @@ class App extends React.Component {
     }
   }
 
-  handleChange = e => {
-    this.setState({ searchFiled: e.target.value });
+  onSearchChange = e => {
+    this.setState({ searchFiled: e.target.value }, () =>
+      console.log(this.state.searchFiled)
+    );
   };
 
   render() {
@@ -40,16 +41,11 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <input
-          className="search"
-          type="search"
+        <h1>Monster Rolodex</h1>
+        <SearchBox
           placeholder="search monsters"
-          onChange={this.handleChange}
+          onSearchChange={this.onSearchChange}
         />
-        {/* <SearchBox
-          placeholder="search monsters"
-          handleChange={e => this.setState({ searchFiled: e.target.value })}
-        /> */}
         <CardList monsters={filteredMonsters} />
       </div>
     );
